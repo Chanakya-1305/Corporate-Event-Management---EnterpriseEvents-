@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Event Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+<body class="auth-page-body">
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'homepage' %}"> Enterprise<span>Events.</span> </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'homepage' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'Aboutus' %}">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'Features' %}">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'Events' %}">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'HowItWorks' %}">How It Works</a>
+                </li>
+                <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                    <a href="{% url 'signup' %}" class="btn-primary-custom">
+                        Get Started
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+    <main class="auth-page">
+        <section class="auth-showcase">
+            <a class="auth-brand" href="{% url 'homepage' %}">Enterprise<span>Events.</span></a>
+            <div class="showcase-content">
+                <div class="showcase-label"><i class="bi bi-stars"></i> Smart Event Management</div>
+                <h1 id="showcase-content1">Welcome back to your event workspace.</h1>
+                <p>Plan conferences, webinars and team events from one organized, enterprise-ready platform.</p>
+            </div>
+            <div class="showcase-stats">
+                <div class="showcase-stat"><strong>One platform</strong><span>For every event</span></div>
+                <div class="showcase-stat"><strong>Simple setup</strong><span>Fast registration</span></div>
+            </div>
+        </section>
+        <section class="auth-panel">
+            <div class="auth-card">
+                <div class="auth-heading">
+                    <span class="eyebrow">Member login</span>
+                    <h2>Sign in to continue</h2>
+                    <p>Enter your account details below.</p>
+                </div>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+                <form class="auth-form" method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="field">
+                        <label for="email">Email address</label>
+                        <div class="input-wrap">
+                            <i class="bi bi-envelope"></i>
+                            <input type="email" name="email" id="email" placeholder="you@company.com" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="password">Password</label>
+                        <div class="input-wrap">
+                            <i class="bi bi-lock"></i>
+                            <input type="password" name="password" id="password" placeholder="Enter your password" required>
+                        </div>
+                    </div>
+                    <div class="form-options">
+                        <label class="remember">
+                            <input type="checkbox" name="remember">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="auth-submit">Sign in <i class="bi bi-arrow-right"></i></button>
+                </form>
+                <p class="auth-switch">New to EnterpriseEvents? <a href="{% url 'signup' %}">Create an account</a></p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
